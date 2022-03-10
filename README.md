@@ -15,7 +15,7 @@ TBD - SUMMARY
 ## Routes
 
 | Method | Path | Purpose |
-| ------ | - | ----------------------------- |
+| - | - | - |
 | GET | `/` | The home page |
 | GET | `/places` | Index page listing all places |
 | GET | `/places/new` | New form for a place |
@@ -32,7 +32,7 @@ TBD - SUMMARY
 **places** 
 
 | Field | Type |
-| ---------- | ------------ |
+| - | - |
 | _id | Object ID |
 | name | String |
 | city | String |
