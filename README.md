@@ -40,23 +40,3 @@ TBD - SUMMARY
 | cuisines | String |
 | pic | String |
 
-**misc**
-
-| Field | Type |
-| ---------- | ------------ |
-| _id | Object ID |
-| place_id | ref(places) Object_Id |
-| rant | Boolean |
-| rating | Number |
-| comment | String |
-| reviewer | String |
-
-## Planning
-
-### User Stories
-
-TBD
-
-### Wireframes
-
-TBD
