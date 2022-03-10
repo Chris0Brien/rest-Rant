@@ -40,7 +40,7 @@ TBD - SUMMARY
 | cuisines | String |
 | pic | String |
 
-**rants**
+**misc**
 
 | Field | Type |
 | ---------- | ------------ |
@@ -60,11 +60,3 @@ TBD
 ### Wireframes
 
 TBD
-
-## Notes
-
-Possible bonus ideas:
-
-* Update for comments
-* Aggregate rating for a place
-* Auto-complete state dropdown
