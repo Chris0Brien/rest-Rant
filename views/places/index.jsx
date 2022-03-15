@@ -17,11 +17,15 @@ function index(data) {
   return (
     <Def>
       <main>
-        <h1>PLACES INDEX PAGE</h1>
-        {placesFormatted}
+        <div className="container">
+        <h1 className="text-start">Places to Rant or Rave</h1>
+        <div className="row">
+          {placesFormatted}
+        </div>
+        </div>
       </main>
     </Def>
-  );
+  )
 }
 
 module.exports = index;
