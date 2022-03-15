@@ -12,7 +12,7 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log("request = >", req.body);
+  //console.log("request = >", req.body);
   if (!req.body.pic) {
     // Default image if one is not provided
     req.body.pic = "http://placekitten.com/400/400";
