@@ -2,7 +2,7 @@ const React = require("react");
 const Def = require("../default");
 
 function show(data) {
-  let image = data.place.pic.match(/^images/)
+  let image = data.place.pic.match(/images/)
     ? `../${data.place.pic}`
     : data.place.pic;
   return (
