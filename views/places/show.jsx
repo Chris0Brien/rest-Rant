@@ -2,7 +2,7 @@ const React = require("react");
 const Def = require("../default");
 
 function show(data) {
-  let image = data.place.pic.match(/images/)
+  let image = data.place.pic.match("../images/")
     ? `../${data.place.pic}`
     : data.place.pic;
   return (
@@ -11,16 +11,18 @@ function show(data) {
         <div className="container">
           <div className="row">
             <div className="col-6">
-              <img className="fullwidth" src={image} alt={data.place.name} />
+              <img src={data.place.pic} alt={data.place.name} />
+              <h3>
+                Located in {data.place.city}, {data.place.state}
+              </h3>
             </div>
             <div className="col-6">
               <h1>{data.place.name}</h1>
               <h2>Rating</h2>
               <p className="text-center">Not Rated</p>
               <h2>Description</h2>
-              <p className="text-center">
-                Located in {data.place.city}, {data.place.state}
-              </p>
+              <h3>{data.place.showEstablished()}</h3>
+              <h4>Serving {data.place.cuisines}</h4>
             </div>
           </div>
           <div className="row">
