@@ -1,130 +1,133 @@
-const React = require("react");
-const Def = require("../default");
+const React = require('react')
+const Def = require('../default')
 
-function show(data) {
-  let comments = <h3 className="inactive">No comments yet!</h3>;
-  let rating = <h3 className="inactive">Not yet rated</h3>;
+function show (data) {
+  // console.log(data.id)
+  let image = (data.place.pic.match(/^images/)) ? `../${data.place.pic}` : data.place.pic
+  let comments = (
+    <h3 className="inactive">
+      No comments yet!
+    </h3>
+  )
+  let rating = (
+    <h3 className="inactive">
+      Not yet rated
+    </h3>
+  )
   if (data.place.comments.length) {
     let sumRatings = data.place.comments.reduce((tot, c) => {
-      return tot + c.stars;
-    }, 0);
-    let averageRating = Math.round(sumRatings / data.place.comments.length);
-    let stars = "";
+      return tot + c.stars
+    }, 0)
+    let averageRating = Math.round(sumRatings / data.place.comments.length)
+    let stars = ''
     for (let i = 0; i < averageRating; i++) {
-      stars += "⭐️";
+      stars += '⭐️'
     }
-    rating = <h3>{stars} stars</h3>;
-    comments = data.place.comments.map((c) => {
+      rating = (
+      <h3>
+        {stars} stars
+      </h3>
+    )
+    comments = data.place.comments.map(c => {
       return (
-        <div className="border col-sm-4">
-          <h2 className="rant">{c.rant ? "Rant! 😡" : "Rave! 😻"}</h2>
+        <div className="border">
+          <h2 className="rant">{c.rant ? 'Rant! 😡' : 'Rave! 😻'}</h2>
           <h4>{c.content}</h4>
           <h3>
             <stong>- {c.author}</stong>
           </h3>
           <h4>Rating: {c.stars}</h4>
-          <form
-            method="POST"
-            action={`/places/${data.place.id}/comment/${c.id}?_method=DELETE`}
-          >
-            <input
-              type="submit"
-              className="btn btn-danger"
-              value="Delete Comment"
-            />
-          </form>
         </div>
-      );
-    });
+      )
+    })
   }
   return (
     <Def>
       <main>
-        <div className="row">
-          <div className="col-sm-6">
-            <img src={data.place.pic} alt={data.place.name} />
-            <h3>
-              Located in {data.place.city}, {data.place.state}
-            </h3>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-6'>
+            <img className='fullwidth' src={image} alt={data.place.name} />
+            <h3>Located in {data.place.city}, {data.place.state}</h3>
           </div>
-          <div className="col-sm-6">
-            <h1>{data.place.name}</h1>
+          <div className='col-6'>
+            <h1>{ data.place.name }</h1>
             <h2>Rating</h2>
-            <h3 className="inactive">Not Rated</h3>
-            <br />
+            <p className="text-center">{rating}</p>
             <h2>Description</h2>
             <h3>{data.place.showEstablished()}</h3>
             <h4>Serving {data.place.cuisines}</h4>
-            <br />
-            <a
-              href={`/places/${data.place.id}/edit`}
-              className="btn btn-warning"
-            >
-              Edit
-            </a>
-            {` `}
-            <form
-              method="POST"
-              action={`/places/${data.place.id}?_method=DELETE`}
-            >
-              <button type="submit" className="btn btn-danger">
-                Delete
-              </button>
-            </form>
+            <div className='row'>
+            <div className='col-4'></div>
+            <div className='col-2'>
+              <a href={`/places/${data.id}/edit`} className="btn btn-warning">Edit</a>
+              </div>
+              <div className='col-2'>
+              <form method="POST" action={`/places/${data.id}?_method=DELETE`}> 
+                <button type="submit" className="btn btn-danger">Delete</button>
+              </form>
+              </div>
+            </div>
           </div>
         </div>
-        <hr />
-        <h2>Comments</h2>
-        <div className="row">{comments}</div>
-        <hr />
-        <h2>Got Your Own Rant or Rave?</h2>
-        <form action={`/places/${data.place.id}/comment`} method="POST">
-          <div className="row">
-            <div className="form-group col-sm-12">
-              <label for="content">Content</label>
-              <textarea
-                id="content"
-                name="content"
-                className="form-control"
-              ></textarea>
-            </div>
+        <div className='row'>
+          <div className='col-12'>
+            <hr />
           </div>
-          <div className="row">
-            <div className="form-group col-sm-4">
-              <label for="author">Author</label>
-              <input id="author" name="author" className="form-control" />
-            </div>
-            <div className="form-group col-sm-4">
-              <label for="stars">Star Rating</label>
-              <input
-                type="range"
-                step="1"
-                min="1"
-                max="5"
-                id="stars"
-                name="stars"
-                className="form-control"
-              />
-            </div>
-            <div className="form-group col-sm-2">
-              <label for="rant">Rant?</label>
-              <input
-                type="checkbox"
-                id="rant"
-                name="rant"
-                className="form-control"
-              />
-            </div>
+        </div>
+        <div className='row'>
+          <div className='col-12'>
+            <h2>Comments</h2>
+            {comments}
           </div>
-          <input
-            type="submit"
-            className="btn btn-primary"
-            value="Add Comment"
-          />
-        </form>
+          <p></p><hr></hr>
+          <h2>Got Your Own Rant or Rave?</h2>
+          <form method="POST" action={`/places/${data.id}/comment`}>
+            <div className="mb-3 row">
+              <div className="col-12">
+                <label htmlFor="content" className="form-label">Content</label>
+                <textarea type="text" className="form-control" id="content" name="content" rows="2"/>
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <div className="col-md-6">
+                <label htmlFor="author" className="form-label">Author</label>
+                <input type="text" className="form-control" id="author" name="author"/>
+              </div>
+              <div className="col-md-5">
+                <label htmlFor="stars" className="form-label">Star Rating</label>
+                <select id="stars" name="stars" className="form-select">
+                  <option selected>Choose...</option>
+                  <option value="0.5" key="0.5">0.5</option>
+                  <option value="1.0" key="1.0">1.0</option>
+                  <option value="1.5" key="1.5">1.5</option>
+                  <option value="2.0" key="2.0">2.0</option>
+                  <option value="2.5" key="2.5">2.5</option>
+                  <option value="3.0" key="3.0">3.0</option>
+                  <option value="3.5" key="3.5">3.5</option>
+                  <option value="4.0" key="4.0">4.0</option>
+                  <option value="4.5" key="4.5">4.5</option>
+                  <option value="5.0" key="5.0">5.0</option>
+                </select>
+              </div>
+              <div className="col-md-1">
+                <div className="form-group">
+                  <label className="form-check-label" htmlFor="rant">Rant?</label>
+                  <input className="form-check-input" type="checkbox" id="rant" name="rant"/>
+                </div>
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <div className="col-12">
+                <button type="submit" className="btn btn-primary">Add Comment</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
       </main>
     </Def>
-  );
+  )
 }
 
-module.exports = show;
+module.exports = show
